@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "cmsis_os2.h"
 #include "RTE_Components.h"
+#include <stdio.h>
 #ifdef    RTE_VIO_BOARD
 #include "cmsis_vio.h"
 #endif
@@ -103,12 +104,15 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
 
   /* MPU Configuration--------------------------------------------------------*/
   MPU_Config();
+
+  /* Enable the CPU Cache */
 
   /* Enable I-Cache---------------------------------------------------------*/
   SCB_EnableICache();
@@ -134,7 +138,9 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+	printf("Hello World!\r\n");
 #ifdef RTE_VIO_BOARD
   vioInit();
 #endif
@@ -258,18 +264,23 @@ void MX_USART1_UART_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
 
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
 
-/* MPU Configuration */
+ /* MPU Configuration */
 
 void MPU_Config(void)
 {
