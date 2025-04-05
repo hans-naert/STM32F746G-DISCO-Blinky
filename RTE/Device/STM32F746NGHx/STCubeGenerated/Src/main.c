@@ -31,6 +31,7 @@
 #if defined(RTE_Compiler_EventRecorder)
 #include "EventRecorder.h"
 #endif
+#include "../../parson.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -141,6 +142,90 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 	printf("Hello World!\r\n");
+
+    const char *json = 
+ "{\"zones\":{"
+    "\"zone1\":{"
+        "\"brightness\":255,"
+        "\"color\":{\"blueValue\":0,\"greenValue\":0,\"redValue\":255},"
+        "\"currentMode\":\"gradient\","
+        "\"gradient1\":{\"blueValue1\":31,\"greenValue1\":255,\"redValue1\":218},"
+        "\"gradient2\":{\"blueValue2\":226,\"greenValue2\":61,\"redValue2\":255},"
+        "\"powerOn\":true"
+    "},"
+    "\"zone2\":{"
+        "\"brightness\":145,"
+        "\"color\":{\"blueValue\":0,\"greenValue\":0,\"redValue\":255},"
+        "\"currentMode\":\"rainbow\","
+        "\"gradient1\":{\"blueValue1\":43,\"greenValue1\":0,\"redValue1\":255},"
+        "\"gradient2\":{\"blueValue2\":255,\"greenValue2\":104,\"redValue2\":66},"
+        "\"powerOn\":false"
+    "},"
+    "\"zone3\":{"
+        "\"brightness\":255,"
+        "\"color\":{\"blueValue\":0,\"greenValue\":217,\"redValue\":255},"
+        "\"currentMode\":\"static\","
+        "\"gradient1\":{\"blueValue1\":43,\"greenValue1\":0,\"redValue1\":255},"
+        "\"gradient2\":{\"blueValue2\":255,\"greenValue2\":104,\"redValue2\":66},"
+        "\"powerOn\":true"
+    "}"
+"}}";
+
+	  // Parse JSON
+    JSON_Value *root_value = json_parse_string(json);
+    if (!root_value) {
+        printf("Error: Failed to parse JSON\n");
+        return 1;
+    }
+
+    JSON_Object *root_object = json_value_get_object(root_value);
+    JSON_Object *zones = json_object_get_object(root_object,"zones");
+		//printf("zones string:%s\n",json_object_get_string(root_object, "zones"));
+		
+
+    if (!zones) {
+        printf("Error: 'zones' object not found!\n");
+        json_value_free(root_value);
+        return 1;
+    }
+
+    // Iterate through all zones
+    size_t num_zones = json_object_get_count(zones);
+    for (size_t i = 0; i < num_zones; i++) {
+        const char *zone_name = json_object_get_name(zones, i);
+        JSON_Object *zone = json_object_get_object(zones, zone_name);
+
+        printf("\nZone: %s\n", zone_name);
+        printf("Brightness: %.0f\n", json_object_get_number(zone, "brightness"));
+        printf("Current Mode: %s\n", json_object_get_string(zone, "currentMode"));
+        printf("Power On: %s\n", json_object_get_boolean(zone, "powerOn") ? "true" : "false");
+
+        // Color
+        JSON_Object *color = json_object_get_object(zone, "color");
+        printf("Color - Red: %.0f, Green: %.0f, Blue: %.0f\n",
+               json_object_get_number(color, "redValue"),
+               json_object_get_number(color, "greenValue"),
+               json_object_get_number(color, "blueValue"));
+
+        // Gradient 1
+        JSON_Object *grad1 = json_object_get_object(zone, "gradient1");
+        printf("Gradient1 - Red: %.0f, Green: %.0f, Blue: %.0f\n",
+               json_object_get_number(grad1, "redValue1"),
+               json_object_get_number(grad1, "greenValue1"),
+               json_object_get_number(grad1, "blueValue1"));
+
+        // Gradient 2
+        JSON_Object *grad2 = json_object_get_object(zone, "gradient2");
+        printf("Gradient2 - Red: %.0f, Green: %.0f, Blue: %.0f\n",
+               json_object_get_number(grad2, "redValue2"),
+               json_object_get_number(grad2, "greenValue2"),
+               json_object_get_number(grad2, "blueValue2"));
+    }
+
+    // Free JSON memory
+    json_value_free(root_value);
+	
+	
 #ifdef RTE_VIO_BOARD
   vioInit();
 #endif
