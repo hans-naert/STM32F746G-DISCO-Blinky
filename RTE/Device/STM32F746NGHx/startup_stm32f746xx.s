@@ -42,10 +42,13 @@ __initial_sp
 
 Heap_Size       EQU     0x00002000
 
+
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
-__heap_base
+    EXPORT  __heap_base__
+    EXPORT  __heap_limit__
+__heap_base__
 Heap_Mem        SPACE   Heap_Size
-__heap_limit
+__heap_limit__
 
                 PRESERVE8
                 THUMB
@@ -449,6 +452,7 @@ SPDIF_RX_IRQHandler
                 
                  ELSE
                 
+				
                  IMPORT  __use_two_region_memory
                  EXPORT  __user_initial_stackheap
                  

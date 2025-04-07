@@ -25,6 +25,7 @@
 #include "cmsis_os2.h"
 #include "RTE_Components.h"
 #include <stdio.h>
+#include <stdlib.h>
 #ifdef    RTE_VIO_BOARD
 #include "cmsis_vio.h"
 #endif
@@ -32,6 +33,7 @@
 #include "EventRecorder.h"
 #endif
 #include "../../parson.h"
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -97,6 +99,38 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
 
   return HAL_OK;
 }
+
+
+extern unsigned char __heap_base__;
+extern unsigned char __heap_limit__;
+
+static unsigned char *heap_end = &__heap_base__;
+
+void check_heap_bounds() {
+    unsigned char *heap_start = &__heap_base__;
+    unsigned char *heap_end   = &__heap_limit__;
+
+    size_t heap_size = heap_end - heap_start;
+
+    printf("Heap starts at: %p\n", heap_start);
+    printf("Heap ends   at: %p\n", heap_end);
+    printf("Heap size   is: %u bytes\n", (unsigned int)heap_size);
+}
+
+void * brk(ptrdiff_t incr) {
+    unsigned char *prev_heap_end = heap_end;
+    unsigned char *new_heap_end = heap_end + incr;
+
+    if (new_heap_end > &__heap_limit__) {
+        // Out of heap memory!
+        printf("_sbrk: heap overflow!\n");
+        return (void *)-1;
+    }
+
+    heap_end = new_heap_end;
+    return (void *)prev_heap_end;
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -142,8 +176,21 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 	printf("Hello World!\r\n");
+	void *a=malloc(80000);	
+	printf("a is at %p\n", a);
+	if(a==NULL)
+		printf("malloc failed\n");
+	else
+	{
+		*((unsigned char*)a+399)='Z';
+		printf("data in malloc area %c\n",*((unsigned char*)a+2047));
+	}
+		
+	
+	check_heap_bounds();
 
     const char *json = 
+ "server:nginx"			
  "{\"zones\":{"
     "\"zone1\":{"
         "\"brightness\":255,"
@@ -169,10 +216,14 @@ int main(void)
         "\"gradient2\":{\"blueValue2\":255,\"greenValue2\":104,\"redValue2\":66},"
         "\"powerOn\":true"
     "}"
-"}}";
+"}}"
+"end:end";
+
+  const char *firstBrace = strchr(json, '{');
+
 
 	  // Parse JSON
-    JSON_Value *root_value = json_parse_string(json);
+    JSON_Value *root_value = json_parse_string(firstBrace);
     if (!root_value) {
         printf("Error: Failed to parse JSON\n");
         return 1;

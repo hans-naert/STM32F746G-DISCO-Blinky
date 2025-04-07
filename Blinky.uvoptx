@@ -162,6 +162,70 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
+          <LineNumber>929</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134248408</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\parson.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Blinky\parson.c\929</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>928</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134248376</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\parson.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Blinky\parson.c\928</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>177</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134241974</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\RTE\Device\STM32F746NGHx\STCubeGenerated\Src\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Blinky\RTE/Device/STM32F746NGHx/STCubeGenerated/Src/main.c\177</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>77</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134244416</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>C:/Users/u0081767/AppData/Local/Arm/Packs/ARM/CMSIS-RTX/5.9.0/Source/rtx_mempool.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Blinky\rtx_mempool.c\77</Expression>
+        </Bp>
+        <Bp>
+          <Number>4</Number>
+          <Type>0</Type>
           <LineNumber>179</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
@@ -176,68 +240,20 @@
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>1</Number>
+          <Number>5</Number>
           <Type>0</Type>
-          <LineNumber>929</LineNumber>
+          <LineNumber>178</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134247880</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\parson.c</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>.\RTE\Device\STM32F746NGHx\STCubeGenerated\Src\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Blinky\parson.c\929</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>928</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134247848</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\parson.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Blinky\parson.c\928</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>132</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134238840</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\Blinky.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Blinky\Blinky.c\132</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>132</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134238882</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\Blinky.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Blinky\Blinky.c\132</Expression>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <MemoryWindow1>
